@@ -284,7 +284,7 @@ export class Graph extends m.mxGraph {
   ];
 
   constructor(container, model, renderHint, stylesheet, themes, standalone) {
-    console.log("Graph container:", container);
+    //console.log("Graph container:", container);
 
     super(container, model, renderHint, stylesheet);
 
@@ -1381,10 +1381,12 @@ export class Graph extends m.mxGraph {
         }
       };
 
+
       // Activates outline connect after 1500ms with touch event or if alt is pressed inside the shape
       // outlineConnect=0 is a custom style that means do not connect to strokes inside the shape,
       // or in other words, connect to the shape's perimeter if the highlight is under the mouse
       // (the name is because the highlight, including all strokes, is called outline in the code)
+	    
       var connectionHandleIsOutlineConnectEvent =
         this.connectionHandler.isOutlineConnectEvent;
 
@@ -1403,6 +1405,7 @@ export class Graph extends m.mxGraph {
         );
       };
 
+ 
       // Adds shift+click to toggle selection state
       var isToggleEvent = this.isToggleEvent;
       this.isToggleEvent = function (evt) {
@@ -4322,6 +4325,7 @@ HoverIcons.prototype.triangleDown = !m.mxClient.IS_SVG
 /**
  * Left arrow.
  */
+
 HoverIcons.prototype.triangleLeft = !m.mxClient.IS_SVG
   ? new m.mxImage(IMAGE_PATH + "/triangle-left.png", 14, 26)
   : Graph.createSvgImage(
@@ -4367,6 +4371,8 @@ HoverIcons.prototype.tolerance = m.mxClient.IS_TOUCH ? 6 : 0;
  *
  */
 HoverIcons.prototype.init = function () {
+   //console.trace("HoverIcons.prototype.init ");
+
   this.arrowUp = this.createArrow(
     this.triangleUp,
     m.mxResources.get("plusTooltip"),
@@ -4477,6 +4483,7 @@ HoverIcons.prototype.init = function () {
       this.setDisplay("none");
     }),
     mouseMove: m.mxUtils.bind(this, function (sender, me) {
+	  //  console.log("mouseMove");
       var evt = me.getEvent();
 
       if (this.isResetEvent(evt)) {
@@ -5101,6 +5108,7 @@ HoverIcons.prototype.getState = function (state) {
  *
  */
 HoverIcons.prototype.update = function (state, x, y) {
+	//console.trace("update");
   if (
     !this.graph.connectionArrowsEnabled ||
     (state != null &&
@@ -5173,7 +5181,7 @@ HoverIcons.prototype.update = function (state, x, y) {
       ) {
         if (state != null && this.graph.isEnabled()) {
           this.removeNodes();
-          this.setCurrentState(state);
+          this.setCurrentState(state);   // koko
           this.repaint();
 
           // Resets connection points on other focused cells
@@ -5194,6 +5202,7 @@ HoverIcons.prototype.update = function (state, x, y) {
  *
  */
 HoverIcons.prototype.setCurrentState = function (state) {
+
   if (state.style["portConstraint"] != "eastwest") {
     this.graph.container.appendChild(this.arrowUp);
     this.graph.container.appendChild(this.arrowDown);

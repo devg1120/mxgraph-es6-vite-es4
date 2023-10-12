@@ -195,7 +195,8 @@ export class EditorUi extends m.mxEventSource {
       }
 
       // Creates hover icons
-      this.hoverIcons = this.createHoverIcons();
+      //this.hoverIcons = this.createHoverIcons();
+      this.hoverIcons = this.createHoverIcons(this.editor.graph);  //GS
 
       // Hides hover icons when cells are moved
 	    
@@ -4068,8 +4069,12 @@ EditorUi.prototype.updateDocumentTitle = function () {
 /**
  * Updates the document title.
  */
-EditorUi.prototype.createHoverIcons = function () {
-  return new HoverIcons(this.editor.graph);
+//EditorUi.prototype.createHoverIcons = function () {
+//  return new HoverIcons(this.editor.graph);
+//};
+
+EditorUi.prototype.createHoverIcons = function (graph) {
+  return new HoverIcons(graph);
 };
 
 /**
@@ -5003,6 +5008,7 @@ EditorUi.prototype.createUi = function () {
   //this.editor2.resetGraph();
   //this.editor2.graph.sizeDidChange();
   this.graph_init(graph2);
+      this.hoverIcons2 = this.createHoverIcons(graph2);  //GS
 /*
       var ele = document.getElementById("split-view");   // GS
       var child1 = ele.children[0];

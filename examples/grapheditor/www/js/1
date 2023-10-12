@@ -201,12 +201,12 @@ export class Graph extends m.mxGraph {
   /**
    * Default size for line jumps.
    */
-static  lineJumpsEnabled = true;
+  static lineJumpsEnabled = true;
 
   /**
    * Default size for line jumps.
    */
-static  defaultJumpSize = 6;
+  static defaultJumpSize = 6;
 
   /**
    * Minimum width for table columns.
@@ -284,11 +284,9 @@ static  defaultJumpSize = 6;
   ];
 
   constructor(container, model, renderHint, stylesheet, themes, standalone) {
-	  //console.log("Graph container:", container);
-	  //console.log("Graph model:", model);
+    console.log("Graph container:", container);
 
     super(container, model, renderHint, stylesheet);
-
 
     this.themes = themes || this.defaultThemes;
     this.currentEdgeStyle = m.mxUtils.clone(this.defaultEdgeStyle);
@@ -1088,7 +1086,7 @@ static  defaultJumpSize = 6;
   /**
    * Sanitizes the given HTML markup.
    */
-static  sanitizeHtml(value, editing) {
+  static sanitizeHtml(value, editing) {
     // Uses https://code.google.com/p/google-caja/wiki/JsHtmlSanitizer
     // NOTE: Original minimized sanitizer was modified to support
     // data URIs for images, mailto and special data:-links.
@@ -1135,43 +1133,37 @@ static  sanitizeHtml(value, editing) {
     return text;
   }
 
-/**
- * Returns the CSS font family from the given computed style.
- */
-static stripQuotes(text)
-{
-        if (text != null)
-        {
-                if (text.charAt(0) == '\'')
-                {
-                        text = text.substring(1);
-                }
-                       
-                if (text.charAt(text.length - 1) == '\'')
-                {
-                        text = text.substring(0, text.length - 1);
-                }
-              
-                if (text.charAt(0) == '"')
-                {
-                        text = text.substring(1);
-                }
-                      
-                if (text.charAt(text.length - 1) == '"')
-                {
-                        text = text.substring(0, text.length - 1);
-                }
-        }
-              
-        return text;
-};
+  /**
+   * Returns the CSS font family from the given computed style.
+   */
+  static stripQuotes(text) {
+    if (text != null) {
+      if (text.charAt(0) == "'") {
+        text = text.substring(1);
+      }
+
+      if (text.charAt(text.length - 1) == "'") {
+        text = text.substring(0, text.length - 1);
+      }
+
+      if (text.charAt(0) == '"') {
+        text = text.substring(1);
+      }
+
+      if (text.charAt(text.length - 1) == '"') {
+        text = text.substring(0, text.length - 1);
+      }
+    }
+
+    return text;
+  }
 
   /**
    * Returns true if the given string is a link.
    *
    * See https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
    */
-static  isLink(text) {
+  static isLink(text) {
     return text != null && Graph.linkPattern.test(text);
   }
 
@@ -1389,10 +1381,12 @@ static  isLink(text) {
         }
       };
 
+
       // Activates outline connect after 1500ms with touch event or if alt is pressed inside the shape
       // outlineConnect=0 is a custom style that means do not connect to strokes inside the shape,
       // or in other words, connect to the shape's perimeter if the highlight is under the mouse
       // (the name is because the highlight, including all strokes, is called outline in the code)
+	    
       var connectionHandleIsOutlineConnectEvent =
         this.connectionHandler.isOutlineConnectEvent;
 
@@ -1411,6 +1405,7 @@ static  isLink(text) {
         );
       };
 
+ 
       // Adds shift+click to toggle selection state
       var isToggleEvent = this.isToggleEvent;
       this.isToggleEvent = function (evt) {
@@ -1774,7 +1769,7 @@ Graph.prototype.defaultScrollbars = !m.mxClient.IS_IOS;
  * Specifies if the page should be visible for new files. Default is true.
  */
 //Graph.prototype.defaultPageVisible = true;
-Graph.prototype.defaultPageVisible = false;  /* GS */
+Graph.prototype.defaultPageVisible = false; /* GS */
 
 /**
  * Specifies if the app should run in chromeless mode. Default is false.
@@ -3309,7 +3304,6 @@ Graph.prototype.connectVertex = function (
   createTarget,
   done,
 ) {
-
   ignoreCellAt = ignoreCellAt ? ignoreCellAt : false;
 
   // Ignores relative edge labels
@@ -4331,6 +4325,7 @@ HoverIcons.prototype.triangleDown = !m.mxClient.IS_SVG
 /**
  * Left arrow.
  */
+
 HoverIcons.prototype.triangleLeft = !m.mxClient.IS_SVG
   ? new m.mxImage(IMAGE_PATH + "/triangle-left.png", 14, 26)
   : Graph.createSvgImage(
@@ -5203,6 +5198,9 @@ HoverIcons.prototype.update = function (state, x, y) {
  *
  */
 HoverIcons.prototype.setCurrentState = function (state) {
+	console.trece("ok");
+
+	return;
   if (state.style["portConstraint"] != "eastwest") {
     this.graph.container.appendChild(this.arrowUp);
     this.graph.container.appendChild(this.arrowDown);
@@ -5881,7 +5879,6 @@ TableLayout.prototype.execute = function (parent) {
     var pts = state.absolutePoints;
 
     if (Graph.lineJumpsEnabled) {
-
       var changed = state.routedPoints != null;
       var actual = null;
 
