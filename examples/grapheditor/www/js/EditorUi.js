@@ -6285,6 +6285,10 @@ EditorUi.prototype.select = function () {
   if (c != undefined) {
     c.style.cursor = "default";
   }
+  c = this.editor2.graph.container;
+  if (c != undefined) {
+    c.style.cursor = "default";
+  }
 };
 
 EditorUi.prototype.pan = function () {
@@ -6294,6 +6298,12 @@ EditorUi.prototype.pan = function () {
   EditorUi.mode_pan = true;
   this.toolbar.toggle_select_pan(true);
   var c = this.editor.graph.container;
+  if (c != undefined) {
+    //c.style.cursor = "crosshair";
+    //c.style.cursor =  'url(/dist/images/svg/pan.svg),auto' ;
+    c.style.cursor = "url(/dist/images/svg/pan.svg),auto";
+  }
+  c = this.editor2.graph.container;
   if (c != undefined) {
     //c.style.cursor = "crosshair";
     //c.style.cursor =  'url(/dist/images/svg/pan.svg),auto' ;
