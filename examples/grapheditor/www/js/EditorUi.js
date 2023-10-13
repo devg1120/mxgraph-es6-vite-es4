@@ -45,6 +45,7 @@ export class EditorUi extends m.mxEventSource {
     this.container = container || document.body;
 
     var graph = this.editor.graph;
+    graph.name = "G1";
     graph.lightbox = lightbox;
     this.initialDefaultVertexStyle = m.mxUtils.clone(graph.defaultVertexStyle);
     this.initialDefaultEdgeStyle = m.mxUtils.clone(graph.defaultEdgeStyle);
@@ -4998,6 +4999,7 @@ EditorUi.prototype.createUi = function () {
   ); 
   var graph2 = this.editor2.graph;
   graph2.lightbox = lightbox;
+  graph2.name = "G2";
   //this.graph_init(graph2);
 
   graph2.init(con);

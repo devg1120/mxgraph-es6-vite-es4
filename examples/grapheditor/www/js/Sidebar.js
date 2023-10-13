@@ -5862,7 +5862,7 @@ Sidebar.prototype.createDragSource = function (
     elt,
     graph,
     m.mxUtils.bind(this, function (graph, evt, target, x, y) {
-    console.log("dragSource  Dragge");
+    console.trace("dragSource  Dragge");
       if (this.updateThread != null) {
         window.clearTimeout(this.updateThread);
       }
