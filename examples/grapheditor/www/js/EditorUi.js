@@ -1301,10 +1301,11 @@ graph_init(graph) {
       );
 
       // Create handler for key events
+      this.keyHandler2 = this.createKeyHandler(this.editor2);
 
       // Getter for key handler
-      this.getKeyHandler = function () {
-        return keyHandler;
+      this.getKeyHandler2 = function () {
+        return keyHandler2;
       };
 
       // Stores the current style and assigns it to new cells
@@ -5865,7 +5866,8 @@ EditorUi.prototype.altShiftActions = {
  */
 EditorUi.prototype.createKeyHandler = function (editor) {
   var editorUi = this;
-  var graph = this.editor.graph;
+  //var graph = this.editor.graph;
+  var graph = editor.graph;
   var keyHandler = new m.mxKeyHandler(graph);
 
   var isEventIgnored = keyHandler.isEventIgnored;
