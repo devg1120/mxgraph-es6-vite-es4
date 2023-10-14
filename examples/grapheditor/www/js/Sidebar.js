@@ -5152,6 +5152,7 @@ Sidebar.prototype.createItem = function (
 	    this.editorUi.editor2.graph
   ];
 
+	
 for (const graph of graphs) {  //GS
 //const graph = graphs[0];
   if (cells.length > 1 || cells[0].vertex) {
@@ -5182,6 +5183,7 @@ for (const graph of graphs) {  //GS
     this.addClickHandler(elt, ds, cells);
   }
 }   
+
 
   // Shows a tooltip with the rendered cell
   if (!m.mxClient.IS_IOS) {
@@ -6782,7 +6784,8 @@ Sidebar.prototype.addClickHandler = function (elt, ds, cells) {
         this.dragElement != null &&
         this.dragElement.style.display == "none"
       ) {
-        sb.itemClicked(cells, ds, evt, elt);
+	      // GS  itemClicked shape insert skip
+        //sb.itemClicked(cells, ds, evt, elt);
       }
 
       oldMouseUp.apply(ds, arguments);
