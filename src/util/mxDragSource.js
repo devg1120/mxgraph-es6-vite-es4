@@ -399,7 +399,6 @@ export class mxDragSource {
   }
 
   drop(graph, evt, dropTarget, x, y) {
-   console.log("drop", graph.name);
     this.dropHandler.apply(this, arguments);
 
     if (graph.container.style.visibility != "hidden") {

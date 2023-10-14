@@ -5149,11 +5149,11 @@ Sidebar.prototype.createItem = function (
 
   var graphs =  [                                  // GS
 	    this.editorUi.editor.graph,
-	    //this.editorUi.editor2.graph
+	    this.editorUi.editor2.graph
   ];
 
-for (const graph of graphs) {  //GS
-
+//for (const graph of graphs) {  //GS
+const graph = graphs[0];
   if (cells.length > 1 || cells[0].vertex) {
     var ds = this.createDragSource(
      graph,
@@ -5181,7 +5181,7 @@ for (const graph of graphs) {  //GS
     );
     this.addClickHandler(elt, ds, cells);
   }
-}
+//}   
 
   // Shows a tooltip with the rendered cell
   if (!m.mxClient.IS_IOS) {
@@ -5864,7 +5864,6 @@ Sidebar.prototype.createDragSource = function (
     elt,
     graph,
     m.mxUtils.bind(this, function (graph, evt, target, x, y) {
-    console.trace("dragSource  Dragge");
       if (this.updateThread != null) {
         window.clearTimeout(this.updateThread);
       }

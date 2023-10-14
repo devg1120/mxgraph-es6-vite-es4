@@ -95,15 +95,6 @@ export class EditorUi extends m.mxEventSource {
       this.splitview = new SplitView(); // GS
       this.splitview.activate(document.getElementById("split-view"));   // GS
 	    
-	    /*
-      var ele = document.getElementById("split-view");   // GS
-      var child1 = ele.children[0];
-      var child2 = ele.children[2];
-      console.log("Top",child1.scrollTop);
-      console.log("Left",child1.scrollLeft);
-      child2.scrollTop = child1.scrollTop;
-      child2.scrollLeft = child1.scrollLeft;
-*/
       //this.refresh();
 
       this.editor2.resetGraph();
@@ -1077,7 +1068,6 @@ graph_init(graph) {
 
       // Hides hover icons when cells are moved
       if (graph.graphHandler != null) {
-	      console.log("graph2.graphHandler");
         var graphHandlerStart = graph.graphHandler.start;
 
         graph.graphHandler.start = function () {
@@ -1483,7 +1473,6 @@ graph_init(graph) {
 
       // Implements a global current style for edges and vertices that is applied to new cells
       var insertHandler = function (cells, asText, model) {
-        //console.trace("EditorUi:insertHamdler", cells,asText,model);
         model = model != null ? model : graph.getModel();
 
         model.beginUpdate();
@@ -6317,12 +6306,9 @@ EditorUi.prototype.pan = function () {
 
 EditorUi.prototype.diagram_vsplit = function () {
   /* GS */
-	console.log("vsplit");
       var ele = document.getElementById("split-view");   // GS
       var child1 = ele.children[0];
       var child2 = ele.children[2];
-      console.log("Top",child1.scrollTop);
-      console.log("Left",child1.scrollLeft);
       child2.scrollTop = child1.scrollTop;
       child2.scrollLeft = child1.scrollLeft;
   EditorUi.split_v = true;
@@ -6339,12 +6325,9 @@ EditorUi.prototype.diagram_vsplit = function () {
 
 EditorUi.prototype.diagram_hsplit = function () {
   /* GS */
-	console.log("hsplit");
       var ele = document.getElementById("split-view");   // GS
       var child1 = ele.children[0];
       var child2 = ele.children[2];
-      console.log("Top",child1.scrollTop);
-      console.log("Left",child1.scrollLeft);
       child2.scrollTop = child1.scrollTop;
       child2.scrollLeft = child1.scrollLeft;
   EditorUi.split_v = false;

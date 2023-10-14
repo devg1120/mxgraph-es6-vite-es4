@@ -1662,22 +1662,17 @@ Toolbar.prototype.destroy = function () {
 };
 
 Toolbar.prototype.toggle_select_pan = function (pan) {
-     console.log("Toolbar.prototype.toggle_select_pan",pan);
 
 	if (pan) {
 
           this.select_bottun.className = this.select_bottun.className.replace('geButtonToggleOn','');
           this.pan_bottun.className = this.pan_bottun.className.concat(' ', 'geButtonToggleOn');
 
-          console.log("select_bottun class",this.select_bottun.className) ;
-          console.log("pan_bottun class",this.pan_bottun.className);
 
 	} else {
           this.select_bottun.className = this.select_bottun.className.concat(' ', 'geButtonToggleOn');
           this.pan_bottun.className = this.pan_bottun.className.replace('geButtonToggleOn','');
 
-          console.log("select_bottun class",this.select_bottun.className) ;
-          console.log("pan_bottun class",this.pan_bottun.className);
 
 	}
 };
