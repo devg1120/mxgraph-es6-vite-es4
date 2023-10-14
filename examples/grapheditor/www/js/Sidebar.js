@@ -7,7 +7,7 @@
 
 import * as m from "../../../../../dist/mxgraph.es.js";
 import { Editor } from "./Editor.js";
-import { Graph } from "./Graph.js";
+import { Graph, HoverIcons } from "./Graph.js";
 
 export class Sidebar {
   constructor(editorUi, container) {
@@ -5152,8 +5152,8 @@ Sidebar.prototype.createItem = function (
 	    this.editorUi.editor2.graph
   ];
 
-//for (const graph of graphs) {  //GS
-const graph = graphs[0];
+for (const graph of graphs) {  //GS
+//const graph = graphs[0];
   if (cells.length > 1 || cells[0].vertex) {
     var ds = this.createDragSource(
      graph,
@@ -5181,7 +5181,7 @@ const graph = graphs[0];
     );
     this.addClickHandler(elt, ds, cells);
   }
-//}   
+}   
 
   // Shows a tooltip with the rendered cell
   if (!m.mxClient.IS_IOS) {
@@ -7382,4 +7382,5 @@ Sidebar.prototype.destroy = function () {
     );
     this.pointerOutHandler = null;
   }
-};
+}
+
