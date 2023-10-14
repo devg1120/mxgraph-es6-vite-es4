@@ -357,6 +357,7 @@ Sidebar.prototype.showTooltip = function (elt, cells, w, h, title, showLabel) {
           if (!m.mxClient.IS_SVG) {
             this.graph2.view.canvas.style.position = "relative";
           }
+	  
         }
 
         this.graph2.model.clear();
@@ -387,6 +388,7 @@ Sidebar.prototype.showTooltip = function (elt, cells, w, h, title, showLabel) {
         var bounds = this.graph2.getGraphBounds();
         var width = bounds.width + 2 * this.tooltipBorder + 4;
         var height = bounds.height + 2 * this.tooltipBorder;
+
 
         if (m.mxClient.IS_QUIRKS) {
           height += 4;
@@ -5147,7 +5149,7 @@ Sidebar.prototype.createItem = function (
 
   var graphs =  [                                  // GS
 	    this.editorUi.editor.graph,
-	    this.editorUi.editor2.graph
+	    //this.editorUi.editor2.graph
   ];
 
 for (const graph of graphs) {  //GS
