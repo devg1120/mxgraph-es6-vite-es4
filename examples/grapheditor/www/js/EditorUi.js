@@ -1,4 +1,4 @@
-/*
+/*        
  * Copyright (c) 2006-2012, JGraph Ltd
  */
 /**
@@ -447,12 +447,13 @@ export class EditorUi extends m.mxEventSource {
         if (evtName == m.mxEvent.MOUSE_DOWN) {
           this.container.focus();
         }
-
         graphFireMouseEvent.apply(this, arguments);
       };
 
       // Configures automatic expand on mouseover
       graph.popupMenuHandler.autoExpand = true;
+
+
 
       // Installs context menu
       if (this.menus != null) {
@@ -654,7 +655,6 @@ export class EditorUi extends m.mxEventSource {
 
       // Implements a global current style for edges and vertices that is applied to new cells
       var insertHandler = function (cells, asText, model) {
-        //console.trace("EditorUi:insertHamdler", cells,asText,model);
         model = model != null ? model : graph.getModel();
 
         model.beginUpdate();
@@ -1266,7 +1266,6 @@ graph_init(graph) {
         if (evtName == m.mxEvent.MOUSE_DOWN) {
           this.container.focus();
         }
-
         graphFireMouseEvent.apply(this, arguments);
       };
 
@@ -1965,6 +1964,8 @@ EditorUi.prototype.hsplitClickEnabled = false;
 EditorUi.prototype.init = function () {
   var graph = this.editor.graph;
 	this.init2(graph);
+  var graph2 = this.editor2.graph;    // GS  
+	this.init2(graph2);
 }
 
 EditorUi.prototype.init2 = function (graph) {
@@ -4547,6 +4548,7 @@ EditorUi.prototype.addUndoListener = function () {
  * Updates the states of the given toolbar items based on the selection.
  */
 EditorUi.prototype.updateActionStates = function () {
+
   var graph = this.editor.graph;
   var selected = !graph.isSelectionEmpty();
   var vertexSelected = false;
@@ -4992,25 +4994,21 @@ EditorUi.prototype.createUi = function () {
   //this.graph_init(graph2);
 
   graph2.init(con);
-      //graph2.container.setAttribute("tabindex", "1");
+      //graph2.container.setAttribute("oleabindex", "1");
       //graph2.container.style.cursor = "default";
 
+   //this.init2(graph2);
 
   this.initCanvas(graph2);
   //this.editor2.resetGraph();
   //this.editor2.graph.sizeDidChange();
   this.graph_init(graph2);
       this.hoverIcons2 = this.createHoverIcons(graph2);  //GS
-/*
-      var ele = document.getElementById("split-view");   // GS
-      var child1 = ele.children[0];
-      var child2 = ele.children[2];
-      console.log("Top",child1.scrollTop);
-      console.log("Left",child1.scrollLeft);
-      child2.scrollTop = child1.scrollTop;
-      child2.scrollLeft = child1.scrollLeft;
-      */
-  
+/********************************************/
+
+
+
+
 
 /********************************************/
   // Creates the sidebar
@@ -6270,7 +6268,6 @@ EditorUi.prototype.createKeyHandler = function (editor) {
 
 EditorUi.prototype.select = function () {
   /* GS */
-  //console.log("EditorUi  select");
   EditorUi.mode_select = true;
   EditorUi.mode_pan = false;
   this.toolbar.toggle_select_pan(false);
@@ -6286,7 +6283,6 @@ EditorUi.prototype.select = function () {
 
 EditorUi.prototype.pan = function () {
   /* GS */
-  //console.log("EditorUi  pan");
   EditorUi.mode_select = false;
   EditorUi.mode_pan = true;
   this.toolbar.toggle_select_pan(true);

@@ -5108,7 +5108,6 @@ HoverIcons.prototype.getState = function (state) {
  *
  */
 HoverIcons.prototype.update = function (state, x, y) {
-	//console.trace("update");
   if (
     !this.graph.connectionArrowsEnabled ||
     (state != null &&
@@ -8067,6 +8066,7 @@ if (typeof m.mxVertexHandler != "undefined") {
      * Overrides double click handling to avoid accidental inserts of new labels in dblClick below.
      */
     Graph.prototype.click = function (me) {
+
       m.mxGraph.prototype.click.call(this, me);
 
       // Stores state and source for checking in dblClick
@@ -9758,7 +9758,9 @@ if (typeof m.mxVertexHandler != "undefined") {
       var oldFireMouseEvent = this.fireMouseEvent;
 
       this.fireMouseEvent = function (evtName, me, sender) {
+		console.log(this.name, "Graph fireMouseEvent");
         if (evtName == m.mxEvent.MOUSE_DOWN) {
+
           // For hit detection on edges
           me = this.updateMouseEvent(me);
 

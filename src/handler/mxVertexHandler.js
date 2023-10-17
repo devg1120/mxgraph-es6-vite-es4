@@ -49,6 +49,7 @@ static   rotationHandleVSpacing = -16;
   }
 
   init() {
+//	  console.trace("mxVertexHandler.js  init", this.state.view.graph.name);
     this.graph = this.state.view.graph;
     this.selectionBounds = this.getSelectionBounds(this.state);
     this.bounds = new mxRectangle(
