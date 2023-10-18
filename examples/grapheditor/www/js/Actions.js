@@ -33,6 +33,9 @@ Actions.prototype.init = function () {
   var ui = this.editorUi;
   var editor = ui.editor;
   var graph = editor.graph;
+  //var editor2 = ui.editor2;
+  //var graph2 = editor2.graph;
+
   var isGraphEnabled = function () {
     return (
       Action.prototype.isEnabled.apply(this, arguments) && graph.isEnabled()
@@ -346,6 +349,20 @@ Actions.prototype.init = function () {
     if (select != null) {
       graph.setSelectionCells(select);
     }
+
+  var editor2 = ui.editor2;                                             //GS
+  var graph2 = editor2.graph;
+    graph2.escape();
+    var select = graph2.deleteCells(
+      graph2.getDeletableCells(graph2.getSelectionCells()),
+      includeEdges,
+    );
+
+    if (select != null) {
+      graph2.setSelectionCells(select);
+    }
+
+
   }
 
   this.addAction(

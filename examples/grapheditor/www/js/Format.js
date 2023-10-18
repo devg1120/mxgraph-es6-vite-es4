@@ -80,6 +80,9 @@ Format.prototype.init = function () {
   var editor = ui.editor;
   var graph = editor.graph;
 
+  var editor2 = ui.editor2;
+  var graph2 = editor2.graph;
+
   this.update = m.mxUtils.bind(this, function (sender, evt) {
     this.clearSelectionState();
     this.refresh();
@@ -90,6 +93,17 @@ Format.prototype.init = function () {
   graph.addListener(m.mxEvent.EDITING_STOPPED, this.update);
   graph.getModel().addListener(m.mxEvent.CHANGE, this.update);
   graph.addListener(
+    m.mxEvent.ROOT,
+    m.mxUtils.bind(this, function () {
+      this.refresh();
+    }),
+  );
+
+  graph2.getSelectionModel().addListener(m.mxEvent.CHANGE, this.update);
+  graph2.addListener(m.mxEvent.EDITING_STARTED, this.update);
+  graph2.addListener(m.mxEvent.EDITING_STOPPED, this.update);
+  graph2.getModel().addListener(m.mxEvent.CHANGE, this.update);
+  graph2.addListener(
     m.mxEvent.ROOT,
     m.mxUtils.bind(this, function () {
       this.refresh();
@@ -135,6 +149,7 @@ Format.prototype.getSelectionState = function () {
  * Returns information about the current selection.
  */
 Format.prototype.createSelectionState = function () {
+
   var cells = this.editorUi.editor.graph.getSelectionCells();
   var result = this.initSelectionState();
 
@@ -405,6 +420,7 @@ Format.prototype.clear = function () {
  * Adds the label menu items to the given menu and parent.
  */
 Format.prototype.refresh = function () {
+
   // Performance tweak: No refresh needed if not visible
   if (this.container.style.width == "0px") {
     return;
@@ -413,6 +429,7 @@ Format.prototype.refresh = function () {
   this.clear();
   var ui = this.editorUi;
   var graph = ui.editor.graph;
+  var graph2 = ui.editor2.graph;  //GS
 
   var div = document.createElement("div");
   div.style.whiteSpace = "nowrap";
@@ -504,7 +521,8 @@ Format.prototype.refresh = function () {
 
   var idx = 0;
 
-  if (graph.isSelectionEmpty()) {
+  // GS  if (graph.isSelectionEmpty()) {
+  if (graph.isSelectionEmpty() && graph2.isSelectionEmpty()) { // GS
     m.mxUtils.write(label, m.mxResources.get("diagram"));
     label.style.borderLeftWidth = "0px";
 

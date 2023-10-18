@@ -456,6 +456,7 @@ export class EditorUi extends m.mxEventSource {
 
 
       // Installs context menu
+	    
       if (this.menus != null) {
         graph.popupMenuHandler.factoryMethod = m.mxUtils.bind(
           this,
@@ -464,6 +465,7 @@ export class EditorUi extends m.mxEventSource {
           },
         );
       }
+      
 
       // Hides context menu
       m.mxEvent.addGestureListeners(
@@ -2024,17 +2026,20 @@ EditorUi.prototype.init2 = function (graph) {
     this.addUndoListener();
     this.addBeforeUnloadListener();
 
+
     graph.getSelectionModel().addListener(
       m.mxEvent.CHANGE,
       m.mxUtils.bind(this, function () {
-        this.updateActionStates();
+        //this.updateActionStates();
+        this.updateActionStates(graph);
       }),
     );
 
     graph.getModel().addListener(
       m.mxEvent.CHANGE,
       m.mxUtils.bind(this, function () {
-        this.updateActionStates();
+        //this.updateActionStates();
+        this.updateActionStates(graph);
       }),
     );
 
@@ -2045,17 +2050,20 @@ EditorUi.prototype.init2 = function (graph) {
     //this.editor.graph.setDefaultParent = function () {
     graph.setDefaultParent = function () {
       graphSetDefaultParent.apply(this, arguments);
-      ui.updateActionStates();
+      //ui.updateActionStates();
+      ui.updateActionStates(graph);
     };
 
     // Hack to make editLink available in vertex handler
     graph.editLink = ui.actions.get("editLink").funct;
 
-    this.updateActionStates();
+    //this.updateActionStates();
+    this.updateActionStates(graph);
     this.initClipboard();
 
     // this.initCanvas();
-    this.initCanvas(this.editor.graph);
+    //this.initCanvas(this.editor.graph);
+    this.initCanvas(graph);    //GS
 
     if (this.format != null) {
       this.format.init();
@@ -2068,6 +2076,8 @@ EditorUi.prototype.init2 = function (graph) {
  */
 EditorUi.prototype.installShapePicker = function () {
   var graph = this.editor.graph;
+  this.installShapePicker2(graph);
+  var graph = this.editor2.graph;
   this.installShapePicker2(graph);
 
 }
@@ -2605,7 +2615,7 @@ EditorUi.prototype.createMenus = function () {
 /**
  * Hook for allowing selection and context menu for certain events.
  */
-EditorUi.prototype.updatePasteActionStates = function () {
+EditorUi.prototype.updatePasteActionStates = function (graph_) {
   var graph = this.editor.graph;
   var paste = this.actions.get("paste");
   var pasteHere = this.actions.get("pasteHere");
@@ -2722,6 +2732,7 @@ EditorUi.prototype.initClipboard = function () {
     cellEditorStopEditing.apply(this, arguments);
     ui.updatePasteActionStates();
   };
+
 
   this.updatePasteActionStates();
 };
@@ -4547,9 +4558,12 @@ EditorUi.prototype.addUndoListener = function () {
 /**
  * Updates the states of the given toolbar items based on the selection.
  */
-EditorUi.prototype.updateActionStates = function () {
+//EditorUi.prototype.updateActionStates = function () {   //GS
+EditorUi.prototype.updateActionStates = function (graph) {
 
-  var graph = this.editor.graph;
+
+
+  // GS  var graph = this.editor.graph;
   var selected = !graph.isSelectionEmpty();
   var vertexSelected = false;
   var groupSelected = false;
@@ -4581,6 +4595,7 @@ EditorUi.prototype.updateActionStates = function () {
       }
     }
   }
+
 
   // Updates action states
   var actions = [
@@ -4699,7 +4714,7 @@ EditorUi.prototype.updateActionStates = function () {
   this.actions.get("selectAll").setEnabled(unlocked);
   this.actions.get("selectNone").setEnabled(unlocked);
 
-  this.updatePasteActionStates();
+  this.updatePasteActionStates(graph);  //GS
 };
 
 EditorUi.prototype.zeroOffset = new m.mxPoint(0, 0);
@@ -6041,6 +6056,7 @@ EditorUi.prototype.createKeyHandler = function (editor) {
   var keyHandlerGetFunction = keyHandler.getFunction;
 
   m.mxKeyHandler.prototype.getFunction = function (evt) {
+	  console.log("m.mxKeyHandler.prototype.getFunction",evt);
     if (graph.isEnabled()) {
       // TODO: Add alt modified state in core API, here are some specific cases
       if (m.mxEvent.isShiftDown(evt) && m.mxEvent.isAltDown(evt)) {

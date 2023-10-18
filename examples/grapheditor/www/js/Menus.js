@@ -1514,7 +1514,9 @@ Menus.prototype.createPopupMenu = function (menu, cell, evt) {
  * Creates the keyboard event handler for the current graph and history.
  */
 Menus.prototype.addPopupMenuHistoryItems = function (menu, cell, evt) {
-  if (this.editorUi.editor.graph.isSelectionEmpty()) {
+  //if (this.editorUi.editor.graph.isSelectionEmpty()) {
+  if (this.editorUi.editor.graph.isSelectionEmpty() &&       //GS
+      this.editorUi.editor2.graph.isSelectionEmpty()) {
     this.addMenuItems(menu, ["undo", "redo"], null, evt);
   }
 };
@@ -1523,7 +1525,9 @@ Menus.prototype.addPopupMenuHistoryItems = function (menu, cell, evt) {
  * Creates the keyboard event handler for the current graph and history.
  */
 Menus.prototype.addPopupMenuEditItems = function (menu, cell, evt) {
-  if (this.editorUi.editor.graph.isSelectionEmpty()) {
+  //if (this.editorUi.editor.graph.isSelectionEmpty()) {
+  if (this.editorUi.editor.graph.isSelectionEmpty() &&      //GS
+      this.editorUi.editor2.graph.isSelectionEmpty()) {
     this.addMenuItems(menu, ["pasteHere"], null, evt);
   } else {
     this.addMenuItems(
@@ -1539,7 +1543,9 @@ Menus.prototype.addPopupMenuEditItems = function (menu, cell, evt) {
  * Creates the keyboard event handler for the current graph and history.
  */
 Menus.prototype.addPopupMenuStyleItems = function (menu, cell, evt) {
-  if (this.editorUi.editor.graph.getSelectionCount() == 1) {
+  //if (this.editorUi.editor.graph.getSelectionCount() == 1) {
+  if (this.editorUi.editor.graph.getSelectionCount() == 1  ||    //GS
+      this.editorUi.editor2.graph.getSelectionCount() == 1) {
     this.addMenuItems(menu, ["-", "setAsDefaultStyle"], null, evt);
   } else if (this.editorUi.editor.graph.isSelectionEmpty()) {
     this.addMenuItems(menu, ["-", "clearDefaultStyle"], null, evt);
@@ -1551,12 +1557,13 @@ Menus.prototype.addPopupMenuStyleItems = function (menu, cell, evt) {
  */
 Menus.prototype.addPopupMenuArrangeItems = function (menu, cell, evt) {
   var graph = this.editorUi.editor.graph;
+  var graph2 = this.editorUi.editor2.graph;
 
-  if (!graph.isSelectionEmpty()) {
+  if (!graph.isSelectionEmpty() ||  !graph.isSelectionEmpty()) {
     this.addMenuItems(menu, ["-", "toFront", "toBack"], null, evt);
   }
 
-  if (graph.getSelectionCount() > 1) {
+  if (graph.getSelectionCount() > 1 || graph2.getSelectionCount() > 1) {
     this.addMenuItems(menu, ["-", "group"], null, evt);
   } else if (
     graph.getSelectionCount() == 1 &&
